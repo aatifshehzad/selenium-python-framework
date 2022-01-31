@@ -1,0 +1,24 @@
+2022-01-31 11:59:44,738 :INFO :TestHomePage :D:\seleniumPython
+2022-01-31 11:59:46,350 :ERROR :TestHomePage :An Exception Occurred: 'FirstName'
+2022-01-31 11:59:46,641 :INFO :TestHomePage :D:\seleniumPython
+2022-01-31 11:59:46,850 :ERROR :TestHomePage :An Exception Occurred: 'FirstName'
+2022-01-31 12:00:15,796 :INFO :TestHomePage :D:\seleniumPython
+2022-01-31 12:00:17,814 :INFO :TestHomePage :×
+Success! The Form has been submitted successfully!.
+2022-01-31 12:00:17,817 :INFO :TestHomePage :D:\seleniumPython
+2022-01-31 12:00:18,267 :INFO :TestHomePage :×
+Success! The Form has been submitted successfully!.
+2022-01-31 12:00:53,005 :INFO :TestHomePage :D:\seleniumPython
+2022-01-31 12:00:54,659 :INFO :TestHomePage :×
+Success! The Form has been submitted successfully!.
+2022-01-31 12:01:04,663 :INFO :TestHomePage :D:\seleniumPython
+2022-01-31 12:01:05,091 :INFO :TestHomePage :×
+Success! The Form has been submitted successfully!.
+2022-01-31 12:04:36,350 :INFO :TestHomePage :{'Name': 'Aatif', 'Email': 'aatif.shehzad@hotmail.com', 'Gender': 'Male'}
+2022-01-31 12:04:36,350 :INFO :TestHomePage :D:\seleniumPython
+2022-01-31 12:04:38,152 :INFO :TestHomePage :×
+Success! The Form has been submitted successfully!.
+2022-01-31 12:04:38,154 :INFO :TestHomePage :{'Name': 'AB', 'Email': 'AB@test.com', 'Gender': 'Female'}
+2022-01-31 12:04:38,154 :INFO :TestHomePage :D:\seleniumPython
+2022-01-31 12:04:38,588 :INFO :TestHomePage :×
+Success! The Form has been submitted successfully!.

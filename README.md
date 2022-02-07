@@ -9,6 +9,7 @@ This framework is created using python language and needs installation of some m
 2. Installing the Dependencies:
 
       cd path/to/root
+      
       pip install -r requirements.txt
   
 Feel free to clone and extend.

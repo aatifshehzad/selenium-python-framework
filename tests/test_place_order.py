@@ -4,9 +4,8 @@ from utils.baseclass import BaseClass
 
 class TestOne(BaseClass):
 
-    def test_e2e(self):
+    def test_place_order(self):
         obj_homepage = HomePage(self.driver)
-        self.driver.get('https://rahulshettyacademy.com/angularpractice/')
         obj_checkoutpage = obj_homepage.get_shop_item()
         card_titles = obj_homepage.get_card_titles()
         i = -1

@@ -4,7 +4,7 @@ This framework is created using python language and needs installation of some m
 
 1. Cloning the Repository:
 
-  git clone https://github.com/aatifshehzad/selenium-python-framework.git
+      git clone https://github.com/aatifshehzad/selenium-python-framework.git
 
 2. Installing the Dependencies:
 

@@ -1,5 +1,3 @@
-import time
-
 import pytest
 
 from pageobjects.homepage import HomePage
@@ -18,7 +16,6 @@ class TestHomePage(BaseClass):
             self.obj_logger.info(get_data)
             self.obj_logger.info(Logger.ROOT_PATH)
             obj_homepage = HomePage(self.driver)
-            self.driver.get('https://rahulshettyacademy.com/angularpractice/')
             obj_homepage.get_name().send_keys(get_data["Name"])
             obj_homepage.get_email().send_keys(get_data["Email"])
             obj_homepage.get_checkbox().click()

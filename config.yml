@@ -1,0 +1,4 @@
+browser: 'chrome'
+headless: false
+url: 'https://rahulshettyacademy.com/angularpractice/'
+time_out: 30

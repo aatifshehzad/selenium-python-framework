@@ -82,6 +82,7 @@ def setup(request, config, get_browser, get_timeout, get_url):
     request.cls.driver = driver
     yield
     driver.close()
+    driver.quit()
 
 
 @pytest.mark.hookwrapper

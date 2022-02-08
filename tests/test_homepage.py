@@ -1,3 +1,4 @@
+import allure
 import pytest
 
 from pageobjects.homepage import HomePage
@@ -6,6 +7,7 @@ from utils.excel_reader_utils import ExcelReader
 from utils.logger import Logger
 
 
+@allure.severity(allure.severity_level.NORMAL)
 class TestHomePage(BaseClass):
     obj_excel_reader = ExcelReader()
     obj_logger = Logger().get_logger()

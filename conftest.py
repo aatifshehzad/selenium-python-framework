@@ -1,8 +1,8 @@
 import os
-from pathlib import Path
 import yaml
 import logging
 import pytest
+from pathlib import Path
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -12,6 +12,7 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from utils.logger import Logger
 
 driver = None
+browser = None
 config_path = str(Path(__file__).parent) + os.sep + "config.yml"
 default_wait_time = 10
 supported_browsers = ["chrome", "firefox", "edge"]
@@ -33,27 +34,31 @@ def config():
 @pytest.fixture(scope='class')
 def setup(request, config):
     global driver
+    global browser
     if "browser" not in config:
-        raise Exception('The config file does not contain "browser"')
+        browser = request.config.getoption("--browser")
     elif config["browser"] not in supported_browsers:
         raise Exception(f'"{config["browser"]}" is not a supported browser')
+    else:
+        browser = config["browser"]
 
-    if config["browser"] == 'chrome':
+    if browser == 'chrome':
         chrome_options = webdriver.ChromeOptions()
         if config["headless"]:
             chrome_options.add_argument("--headless")
         chrome_options.add_argument('--ignore-certificate-errors')
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-    elif config["browser"] == 'firefox':
+    elif browser == 'firefox':
         firefox_options = webdriver.FirefoxOptions
         if config["headless"]:
             firefox_options.headless = True
         driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=firefox_options)
-    elif config["browser"] == 'edge':
+    elif browser == 'edge':
         driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager(log_level=logging.INFO).install()))
     else:
         raise Exception("Provide valid driver name")
     driver.maximize_window()
+
     if (config["time_out"] is not None) and (config["time_out"] != ""):
         driver.implicitly_wait(config["time_out"])
     else:

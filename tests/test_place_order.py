@@ -2,7 +2,7 @@ from pageobjects.homepage import HomePage
 from utils.baseclass import BaseClass
 
 
-class TestOne(BaseClass):
+class TestOrder(BaseClass):
 
     def test_place_order(self):
         obj_homepage = HomePage(self.driver)

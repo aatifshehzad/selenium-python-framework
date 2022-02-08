@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.select import Select
 
 from pageobjects.checkoutpage import CheckoutPage
 from utils.utils import Utils

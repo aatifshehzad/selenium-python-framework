@@ -12,7 +12,7 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 driver = None
 browser = None
 pytest.root_folder = str(Path(__file__).parent)
-config_path = str(Path(__file__).parent) + os.sep + "config.yml"
+config_path = pytest.root_folder + os.sep + "config.yml"
 default_wait_time = 10
 supported_browsers = ["chrome", "firefox", "edge"]
 default_url = "https://www.google.com/"
@@ -30,17 +30,37 @@ def config():
     return yaml.full_load(config_file)
 
 
-@pytest.fixture(scope='class')
-def setup(request, config):
-    global driver
-    global browser
+@pytest.fixture(scope='session')
+def get_browser(request, config):
     if "browser" not in config:
-        browser = request.config.getoption("--browser")
+        return request.config.getoption("--browser")
     elif config["browser"] not in supported_browsers:
         raise Exception(f'"{config["browser"]}" is not a supported browser')
     else:
-        browser = config["browser"]
+        return config["browser"]
 
+
+@pytest.fixture(scope='session')
+def get_timeout(config):
+    if ("time_out" in config) and (config["time_out"] is not None) and (config["time_out"] != ""):
+        return config["time_out"]
+    else:
+        return default_wait_time
+
+
+@pytest.fixture(scope='session')
+def get_url(config):
+    if ("url" in config) and ("url" is not None) and ("url" != ""):
+        return config["url"]
+    else:
+        return default_url
+
+
+@pytest.fixture(scope='class')
+def setup(request, config, get_browser, get_timeout, get_url):
+    global driver
+    global browser
+    browser = get_browser
     if browser == 'chrome':
         chrome_options = webdriver.ChromeOptions()
         if config["headless"]:
@@ -57,16 +77,8 @@ def setup(request, config):
     else:
         raise Exception("Provide valid driver name")
     driver.maximize_window()
-
-    if ("time_out" in config) and (config["time_out"] is not None) and (config["time_out"] != ""):
-        driver.implicitly_wait(config["time_out"])
-    else:
-        driver.implicitly_wait(default_wait_time)
-
-    if ("url" in config) and ("url" is not None) and ("url" != ""):
-        driver.get(config["url"])
-    else:
-        driver.get(default_url)
+    driver.implicitly_wait(get_timeout)
+    driver.get(get_url)
     request.cls.driver = driver
     yield
     driver.close()

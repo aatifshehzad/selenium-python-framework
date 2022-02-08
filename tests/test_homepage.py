@@ -1,3 +1,5 @@
+import os
+
 import allure
 import pytest
 
@@ -31,6 +33,7 @@ class TestHomePage(BaseClass):
             raise Exception(e)
 
     @pytest.fixture(
-        params=obj_excel_reader.get_data_in_list_of_dict("D:\\seleniumPython\\test_data\\test_data.xlsx", "Home_Page"))
+        params=obj_excel_reader.get_data_in_list_of_dict(pytest.root_folder + os.sep + "test_data/test_data.xlsx",
+                                                         "Home_Page"))
     def get_data(self, request):
         return request.param

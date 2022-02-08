@@ -9,10 +9,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
-from utils.logger import Logger
-
 driver = None
 browser = None
+pytest.root_folder = str(Path(__file__).parent)
 config_path = str(Path(__file__).parent) + os.sep + "config.yml"
 default_wait_time = 10
 supported_browsers = ["chrome", "firefox", "edge"]
@@ -59,7 +58,7 @@ def setup(request, config):
         raise Exception("Provide valid driver name")
     driver.maximize_window()
 
-    if (config["time_out"] is not None) and (config["time_out"] != ""):
+    if ("time_out" in config) and (config["time_out"] is not None) and (config["time_out"] != ""):
         driver.implicitly_wait(config["time_out"])
     else:
         driver.implicitly_wait(default_wait_time)
@@ -88,7 +87,7 @@ def pytest_runtest_makereport(item):
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
             file_name = report.nodeid.split("::")[-1] + ".png"
-            file_path = Logger.ROOT_PATH + "/screenshots/" + file_name
+            file_path = pytest.root_folder + os.sep + "screenshots" + os.sep + file_name
             _capture_screenshot(file_path)
             if file_name:
                 html = '<div><img src="/screenshots/%s" alt="screenshot" style="width:304px;height:228px;" ' \
